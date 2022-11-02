@@ -132,9 +132,7 @@ h1{
     margin-left: 5px;
 }
 
-.esconder{
-    display: none;
-}
+
 
 /*tela 2 começa aqui*/
 
@@ -298,3 +296,6 @@ h1{
     color: #818181;
 }
 
+.esconder{
+    display: none;
+}
