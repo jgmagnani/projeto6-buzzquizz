@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 *{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
@@ -63,6 +63,10 @@ header{
     background-color: #fafafa;
     border: 1px dashed #EC362D;
     border-radius: 50px;
+}
+
+.criarQuizz button:hover{
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .container-seusQuizz{
@@ -298,4 +302,71 @@ h1{
 
 .esconder{
     display: none;
+}
+
+.newQuizz{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.newQuizz h1{
+    font-family: Roboto;
+    font-size: 23px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 27px;
+}
+
+.newQuizz input{
+    width: 408px;
+    height: 22px;
+    font-family: Roboto;
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 22px;    
+    text-align: left; 
+    border: none;
+    margin-left: 23px;    
+    color: #000000;
+}
+
+.newQuizz li{    
+    width: 564px;
+    height: 46px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;    
+    display: flex;
+    align-items: center;
+    margin-bottom: 9px;
+}
+
+.newQuizz textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
+
+.btnProsseguir{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    width: 360px;
+    border-radius: 15px;
+    background: #EC362D;
+    border: none;
+    text-align: center;
+}
+
+.prosseguir{
+    width: 100%;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
