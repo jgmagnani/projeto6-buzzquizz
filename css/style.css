@@ -9,6 +9,10 @@
     
 }
 
+body{
+    background-color: #E5E5E5;
+}
+
 header{
     background-color: #EC362D;
     width: 100%;
@@ -103,6 +107,8 @@ h1{
 .quizz img{
     width: 340px;
     height: 181px;
+    background-image: linear-gradient(to top, black, blue);
+    
 
 }
 
@@ -129,3 +135,166 @@ h1{
 .esconder{
     display: none;
 }
+
+/*tela 2 começa aqui*/
+
+.banner{
+    background-color: black;
+    width: 100%;
+    position: relative;
+}
+
+.banner img{
+    width: 100%;
+    height: 227px;
+    opacity: 60%;
+}
+
+.banner h2{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    font-size: 40px;
+}
+
+.container-perguntas{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cx-pergunta{
+    background-color: #FFFFFF;
+    margin-top: 70px;
+    width: 760px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+}
+
+.cx-pergunta .pergunta{
+    background-color: #434CA0;
+    width: 730px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cx-pergunta p{
+    font-size: 23px;
+    font-weight: bolder;
+
+
+}
+
+.respostas{
+    width: 730px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.respostas img{
+    width: 330px;
+    height: 180px;
+}
+
+.respostas p{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #000000;
+}
+
+.efeito img{
+    opacity: 0.3;
+}
+
+.correto p{
+    color: #009C22;
+}
+
+.errado p{
+    color: #FF4B4B;
+}
+
+.cx-resultado{
+    background-color: #FFFFFF;
+    margin-top: 70px;
+    width: 760px;
+    height: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);  
+}
+
+.cx-resultado .titulo{
+    background-color: #EC362D;
+    width: 730px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo p{
+    font-size: 23px;
+    font-weight: bolder;
+
+}
+
+.conteudo{
+    width: 730px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.conteudo img{
+    width: 370px;
+    height: 275px;
+}
+
+.conteudo .texto{
+    width: 300px;
+    height: 275px;
+    
+    
+}
+
+.texto p{
+    color: #484848;
+}
+
+.reiniciar{
+    width: 260px;
+    height: 52px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    font-size: 21px;
+    margin-top: 60px;
+}
+
+.home{
+    text-align: center;
+    border: none;
+    background-color: #E5E5E5;
+    font-size: 21px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    color: #818181;
+}
+
