@@ -20,7 +20,7 @@ function chegouQuizz(resposta){
     listaQuizz = resposta.data;
     addQuizz()
 }
-
+/*
 function addQuizz(){
     let listaTodasQuizz = document.querySelector(".lista-todosQuizz");
     listaTodasQuizz.innerHTML = "" ;
@@ -58,3 +58,4 @@ function addQuizz(){
      }
 
 }
+*/
