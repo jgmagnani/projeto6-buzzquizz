@@ -107,7 +107,7 @@ h1 {
 .quizz img {
   width: 340px;
   height: 181px;
-  background-image: linear-gradient(to top, black, blue);
+
 }
 
 .quizz p {
@@ -116,6 +116,7 @@ h1 {
   position: absolute;
   bottom: 20px;
   left: 10px;
+  word-break: break-all;
 }
 
 .quizz .dregade{
