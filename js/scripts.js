@@ -49,6 +49,12 @@ function addQuizz(){
         `
     } 
     
-
+    if (lsitaSeusQuizz.innerHTML === ""){
+        let containerSeusQuizz = document.querySelector(".container-seusQuizz")
+        containerSeusQuizz.classList.add("esconder")
+     } else{
+        let criarQuizz = document.querySelector(".criarQuizz")
+        criarQuizz.classList.add("esconder")
+     }
 
 }
