@@ -22,28 +22,19 @@
         </div>
 
         <!--retangulo do seus quiz-->
-        <div class="container-seusQuizz esconder">
+        <div class="container-seusQuizz ">
             <div class="titulo-seusQuizz">
                 <h1>Seus Quizzes</h1>  
-                <ion-icon name="add-circle"></ion-icon>
+                <a href="criarQuizz.html">
+                    <ion-icon name="add-circle"></ion-icon>
+                </a>
             </div>
-            <ul class="caixa-seusQuizz">
-                <li class="quizz">
+            <ul class="caixa-Quizz lista-seusQuizz">
+                <li class="quizz" onclick="acessarTela2()">
                     <img src="./img/simpsons.png" alt="">
                     <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
                 </li>
-                <li class="quizz">
-                    <img src="./img/simpsons.png" alt="">
-                    <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                </li>
-                <li class="quizz">
-                    <img src="./img/simpsons.png" alt="">
-                    <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                </li>
-                <li class="quizz">
-                    <img src="./img/simpsons.png" alt="">
-                    <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                </li>
+          
             </ul>       
         </div>
 
@@ -52,28 +43,19 @@
             <div class="titulo-todosQuizz">
                 <h1>Todos os Quizzes</h1>
             </div>
-                <ul class="caixa-seusQuizz">
-                    <li class="quizz">
+                <ul class="caixa-Quizz lista-todosQuizz">
+                    <li class="quizz" onclick="acessarTela2()">
                         <img src="./img/simpsons.png" alt="">
                         <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
+                        <div class="dregade"></div>
                     </li>
-                    <li class="quizz">
-                        <img src="./img/simpsons.png" alt="">
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </li>
-                    <li class="quizz">
-                        <img src="./img/simpsons.png" alt="">
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </li>
-                    <li class="quizz">
-                        <img src="./img/simpsons.png" alt="">
-                        <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-                    </li>
+                
                 </ul>
         </div>
 
     </div> <!--fim da div container-->
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="js/scripts.js"></script>
 </body>
