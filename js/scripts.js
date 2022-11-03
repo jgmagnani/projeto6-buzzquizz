@@ -36,7 +36,7 @@ function addQuizz(){
     listaTodasQuizz.innerHTML = "" ;
 
     let lsitaSeusQuizz = document.querySelector(".lista-seusQuizz");
-    lsitaSeusQuizz.innerHTML = "";
+    //lsitaSeusQuizz.innerHTML = "";
 
     for (let i=0; i< listaQuizz.length; i++ ){
         let quizz = listaQuizz[i];
@@ -59,13 +59,13 @@ function addQuizz(){
         `
     } 
     
-    if (lsitaSeusQuizz.innerHTML === ""){
+    /*if (lsitaSeusQuizz.innerHTML === ""){
         let containerSeusQuizz = document.querySelector(".container-seusQuizz")
         containerSeusQuizz.classList.add("esconder")
      } else{
         let criarQuizz = document.querySelector(".criarQuizz")
         criarQuizz.classList.add("esconder")
-     }
+     }*/
 
 }
 
