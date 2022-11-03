@@ -75,6 +75,7 @@ function prosseguirPerguntas(){
     let urlInput = "";
     let perguntaInput = 0;
     let validacao = 0;
+    let quizInput = 0;
 
     tituloInput = document.querySelector('#tituloNewQuiz').value;
     numTitulo = tituloInput.length;
@@ -82,6 +83,8 @@ function prosseguirPerguntas(){
     urlInput = document.querySelector('#urlNewQuiz').value;
     
     perguntaInput = parseInt(document.querySelector('#perguntaNewQuiz').value);
+
+    quizInput = parseInt(document.querySelector('#niveisNewQuiz').value);
     
     
     if (20 <= numTitulo && numTitulo <= 65){
@@ -96,7 +99,18 @@ function prosseguirPerguntas(){
         validacao++;
     }
 
-    console.log(validacao);
+    if (2 <= quizInput && Number.isInteger(quizInput)){
+        validacao++;
+    }
+
+    if (validacao === 4){
+        //place holder para realizar ação quando a validação está ok.
+        console.log("Validação Ok!")
+
+    } else{
+        alert("Dados incorretos, favor preencher corretamente!")
+    }
+    
 
     
 }
