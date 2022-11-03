@@ -99,17 +99,9 @@ h1 {
   flex-wrap: wrap;
 }
 
-.caixa-Quizz{
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  background-color: rebeccapurple;
-}
-
 .quizz {
   position: relative;
   margin: 5px;
-  width: 100%;    
 }
 
 .quizz img {
@@ -120,10 +112,11 @@ h1 {
 
 .quizz p {
   color: #FFFFFF;
-  width: 310px;
+  max-width: 310px;
   position: absolute;
   bottom: 20px;
   left: 10px;
+  word-wrap: break-word;
 }
 
 .quizz .dregade{
@@ -144,11 +137,12 @@ h1 {
   max-width: 1050px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: start;
   margin-top: 80px;
-  margin-left: 5px;  
+  margin-left: 5px;
 }
-
 
 /*tela 2 começa aqui*/
 
