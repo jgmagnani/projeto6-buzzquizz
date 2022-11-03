@@ -3,6 +3,16 @@ let id = "";
 let urlApi = "https://mock-api.driven.com.br/api/v4/buzzquizz/";
 
 
+//metodo para validar se a url
+const isValidUrl = urlString=> {
+    var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+  '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+return !!urlPattern.test(urlString);
+}
 
 function acessarTela2(){
     window.location.href = "./tela2.html" ;
@@ -57,4 +67,36 @@ function addQuizz(){
         criarQuizz.classList.add("esconder")
      }
 
+}
+
+function prosseguirPerguntas(){
+    let numTitulo = 0;    
+    let tituloInput = "";
+    let urlInput = "";
+    let perguntaInput = 0;
+    let validacao = 0;
+
+    tituloInput = document.querySelector('#tituloNewQuiz').value;
+    numTitulo = tituloInput.length;
+
+    urlInput = document.querySelector('#urlNewQuiz').value;
+    
+    perguntaInput = parseInt(document.querySelector('#perguntaNewQuiz').value);
+    
+    
+    if (20 <= numTitulo && numTitulo <= 65){
+        validacao++;
+    }
+
+    if (isValidUrl(urlInput)){
+        validacao++;
+    }   
+
+    if (3 <= perguntaInput && Number.isInteger(perguntaInput)){
+        validacao++;
+    }
+
+    console.log(validacao);
+
+    
 }
