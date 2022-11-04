@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>BuzzQuizz</title>
   </head>
-  <body>
+  <body onload="renderizarPerguntas()">    
     <header>BuzzQuizz</header>
 
     <div class="tituloCriar">
@@ -47,7 +47,7 @@
       <div class="ulPergunta esconderUl">
         <ul>
           <h2>Pergunta 2</h2>
-          <li><input type="text" placeholder="Texto da Pergunta" /></li>
+          <li><input type="text" id="textoPerguntaInput" placeholder="Texto da Pergunta" /></li>
           <li><input type="text" placeholder="Cor de fundo da pergunta" /></li>
           <h2>Resposta correta</h2>
           <li><input type="text" placeholder="Resposta correta" /></li>
@@ -71,7 +71,7 @@
       <div class="ulPergunta esconderUl">
         <ul>
           <h2>Pergunta 3</h2>
-          <li><input type="text" placeholder="Texto da Pergunta" /></li>
+          <li><input type="text" id="textoPerguntaInput" placeholder="Texto da Pergunta" /></li>
           <li><input type="text" placeholder="Cor de fundo da pergunta" /></li>
           <h2>Resposta correta</h2>
           <li><input type="text" placeholder="Resposta correta" /></li>
