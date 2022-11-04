@@ -1,7 +1,8 @@
 let listaQuizz;
 let id = "";
 let urlApi = "https://mock-api.driven.com.br/api/v4/buzzquizz/";
-
+let url = window.location.href.toString();
+let variavel;
 
 //metodo para validar se a url
 const isValidUrl = urlString=> {
@@ -14,12 +15,17 @@ const isValidUrl = urlString=> {
 return !!urlPattern.test(urlString);
 }
 
-function acessarTela2(){
-    window.location.href = "./tela2.html" ;
+function acessarTela2(elemento){
+    
+    console.log("Elemento " + elemento.querySelector('.meuId').innerHTML)
+
+    window.location.href = "/tela2.html" ;
+    localStorage.setItem("idQuizz", elemento.querySelector('.meuId').innerHTML); 
+
 }
 
-pegarQuizzServidor()
 function pegarQuizzServidor(){
+    console.log("entrou")
     const promessa = axios.get(`${urlApi}quizzes`);
     promessa.then(chegouQuizz);
 }
@@ -27,7 +33,7 @@ function pegarQuizzServidor(){
 function chegouQuizz(resposta){
     console.log("chegou");
     console.log(resposta.data);
-    listaQuizz = resposta.data;
+    listaQuizz = resposta.data;    
     addQuizz()
 }
 
@@ -37,26 +43,29 @@ function addQuizz(){
 
     let lsitaSeusQuizz = document.querySelector(".lista-seusQuizz");
     //lsitaSeusQuizz.innerHTML = "";
-
+    variavel = '';
     for (let i=0; i< listaQuizz.length; i++ ){
         let quizz = listaQuizz[i];
 
         if (quizz.id === id){
             lsitaSeusQuizz.innerHTML +=`
-                <li class="quizz" onclick="acessarTela2()">
+                <li class="quizz" onclick="acessarTela2(this)">
                     <img src=${quizz.image} alt="">
                     <div class="dregade"></div>
                     <p>${quizz.title}</p>
+                    <p class="meuId">${quizz.id}</p>
                 </li>
             `
         }  
             listaTodasQuizz.innerHTML += `
-            <li class="quizz" onclick="acessarTela2()">
+            <li class="quizz" onclick="acessarTela2(this)">
                 <img src=${quizz.image} alt="">
                 <div class="dregade"></div>
                 <p>${quizz.title}</p>
+                <p class="meuId">${quizz.id}</p>
             </li>
         `
+        //console.log("ID " + quizz.id)
     } 
     
     /*if (lsitaSeusQuizz.innerHTML === ""){
@@ -111,6 +120,17 @@ function prosseguirPerguntas(){
         alert("Dados incorretos, favor preencher corretamente!")
     }
     
+}
 
-    
+function mostrarPergunta(elemento) {
+    const pergunta = document.querySelector(".pergunta2");   
+    console.log(pergunta);
+
+    pergunta.classList.remove('pergutaEscondida')
+    pergunta.classList.add('esconderUl');
+
+    if (elemento.classList.includes) {
+        
+    }
+
 }

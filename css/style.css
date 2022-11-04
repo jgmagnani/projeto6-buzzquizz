@@ -107,7 +107,7 @@ h1 {
 .quizz img {
   width: 340px;
   height: 181px;
-  background-image: linear-gradient(to top, black, blue);
+
 }
 
 .quizz p {
@@ -116,7 +116,7 @@ h1 {
   position: absolute;
   bottom: 20px;
   left: 10px;
-  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .quizz .dregade{
@@ -443,8 +443,12 @@ select:focus {
     margin-left: 20px;
 }
 
-.pergutaEscondida img{
-    margin-right: 20px;
+
+
+.pergutaEscondida button{
+  background-color: transparent;
+  border: none;
+   margin-right: 20px;
 }
 
 .esconderUl{
@@ -466,4 +470,8 @@ select:focus {
     background: #EC362D;
     color: #FFF5F4;
     border: none;
+}
+
+.meuId{
+  display: none;
 }
