@@ -1,6 +1,10 @@
 let listaQuizz;
 let id = "";
 let urlApi = "https://mock-api.driven.com.br/api/v4/buzzquizz/";
+let numTitulo = 0;    
+let tituloInput = "";
+let urlInput = "";
+let perguntaInput = 0;
 
 
 //metodo para validar se a url
@@ -69,11 +73,7 @@ function addQuizz(){
 
 }
 
-function prosseguirPerguntas(){
-    let numTitulo = 0;    
-    let tituloInput = "";
-    let urlInput = "";
-    let perguntaInput = 0;
+function prosseguirPerguntas(){    
     let validacao = 0;
     let quizInput = 0;
 
@@ -104,13 +104,43 @@ function prosseguirPerguntas(){
     }
 
     if (validacao === 4){
-        //place holder para realizar ação quando a validação está ok.
-        console.log("Validação Ok!")
+        location.href = 'criarPerguntas.html';
+        localStorage.setItem("numPergunta", perguntaInput);            
 
     } else{
         alert("Dados incorretos, favor preencher corretamente!")
     }
-    
+}
 
-    
+function renderizarPerguntas(){
+    let numPerguntas = localStorage.getItem("numPergunta");
+
+    const listaPerguntas = document.querySelector('.ulPergunta');    
+    listaPerguntas.innerHTML = '';    
+
+    for(let i = 1; i <= numPerguntas; i++){
+        listaPerguntas.innerHTML += `
+            <div class="ulPergunta">
+                <ul>
+                    <h2>Pergunta ${i}</h2>
+                    <li><input type="text" placeholder="Texto da Pergunta" id="textoPerguntaInput${i}"/></li>
+                    <li><input type="text" placeholder="Cor de fundo da pergunta" /></li>
+                    <h2>Resposta correta</h2>
+                    <li><input type="text" placeholder="Resposta correta" /></li>
+                    <li><input type="text" placeholder="URL da imagem" /></li>
+                    <h2>Respostas incorretas</h2>
+                    <li><input type="text" placeholder="Resposta incorreta 1" /></li>
+                    <li><input type="text" placeholder="URL da imagem 1" /></li>
+                    <br />
+                    <li><input type="text" placeholder="Resposta incorreta 2" /></li>
+                    <li><input type="text" placeholder="URL da imagem 2" /></li>
+                    <br />
+                    <li><input type="text" placeholder="Resposta incorreta 3" /></li>
+                    <li><input type="text" placeholder="URL da imagem 3" /></li>
+                </ul>
+            </div>
+      `;
+
+    }
+
 }
