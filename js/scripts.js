@@ -120,6 +120,16 @@ function prosseguirPerguntas() {
   }
 }
 
+function expandirPergunta(num){    
+    let classPerg = 'perguntaEscondida' + num
+    const perguntaIcone = document.querySelector('.pergunta' + CSS.escape(num));            
+    const pergunta = document.getElementById(classPerg);
+    
+    perguntaIcone.innerHTML = '';
+    pergunta.classList.remove("esconderUl");
+    
+}
+
 function renderizarPerguntas() {
   let numPerguntas = localStorage.getItem('numPergunta');
   console.log(numPerguntas);
@@ -151,11 +161,11 @@ function renderizarPerguntas() {
     } else {
     listaPerguntas.innerHTML += `        
         <br />
-        <div class="ulPergunta esconderUl">
+        <div class="ulPergunta esconderUl" id="perguntaEscondida${i + 1}">
             <ul>
                 <h2>Pergunta ${i + 1}</h2>
-                <li><input type="text" placeholder="Texto da Pergunta" id="textoPerguntaInput${i}"/></li>
-                <li><input type="text" placeholder="Cor de fundo da pergunta" /></li>
+                <li><input type="text" placeholder="Texto da Pergunta" id="textoPerguntaInput${i + 1}"/></li>
+                <li><input type="text" placeholder="Cor de fundo da pergunta" id="corPerguntaInput${i + 1}"/></li>
                 <h2>Resposta correta</h2>
                 <li><input type="text" placeholder="Resposta correta" /></li>
                 <li><input type="text" placeholder="URL da imagem" /></li>
@@ -173,7 +183,7 @@ function renderizarPerguntas() {
         
         <div class="pergunta${i + 1} pergutaEscondida">
             <h3>Pergunta ${i + 1}</h3>
-            <button ><img src="imagens/mostrarpergunta.svg" alt=""></button>
+            <button onclick="expandirPergunta(${i + 1})"><img src="imagens/mostrarpergunta.svg" alt=""> </button>
         </div>
       `;
   }}
