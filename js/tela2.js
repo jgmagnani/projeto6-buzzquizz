@@ -75,6 +75,7 @@ function inserirRespostas(pergunta, i){
             <div class="opcao" onclick="comportamento(this)">
             <img src=${resposta.image} alt="">
             <p>${resposta.text}</p>
+            <p class="meuId">${resposta.isCorrectAnswer}</p>
             </div> `
     }
         
@@ -89,6 +90,27 @@ function comparador() {
 
 
 function comportamento(elemento){
-    elemento.classlist.add("")
+    let x = elemento.parentNode
+    let alternativas = x.querySelectorAll(".opcao")
+    //console.log(alternativas[0].innerHTML)
+    //console.log(elemento.innerHTML)
+    
+    
+    for (i=0; i< alternativas.length; i++){
+        if (alternativas[i].innerHTML !==  elemento.innerHTML){
+            alternativas[i].classList.add("efeito")
+        }
+    }
+
+    let corLetra = x.querySelectorAll(".meuId")
+    
+    for (let u=0; u< corLetra.length; u++){
+        if(corLetra[u].innerHTML == "true"){
+            corLetra[u].parentNode.classList.add("correto")
+            //console.log("sim")
+        } else{
+            corLetra[u].parentNode.classList.add("errado")
+        }
+    }
 
 }
