@@ -164,6 +164,7 @@ h1 {
   top: 50%;
   left: 25%;
   font-size: 40px;
+  color: #FFFFFF;
 }
 
 .container-perguntas {
@@ -199,6 +200,10 @@ h1 {
 .cx-pergunta p {
   font-size: 23px;
   font-weight: bolder;
+  color: #FFFFFF;
+  width: 700px;
+  word-break: break-all;
+  text-align: center;
 }
 
 .respostas {
@@ -219,6 +224,8 @@ h1 {
   font-size: 20px;
   font-weight: bolder;
   color: #000000;
+  width: 300px;
+  word-break: break-all;
 }
 
 .efeito img {
