@@ -22,6 +22,14 @@ const isValidUrl = (urlString) => {
   return !!urlPattern.test(urlString);
 };
 
+//metodo para validar se a url
+const isValidHex = (urlString) => {
+    var urlPattern = new RegExp(        
+      '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$', 'i'
+    ); 
+    return !!urlPattern.test(urlString);
+  };
+
 function acessarTela2(elemento) {
   console.log('Elemento ' + elemento.querySelector('.meuId').innerHTML);
 
@@ -131,60 +139,151 @@ function expandirPergunta(num){
 }
 
 function renderizarPerguntas() {
-  let numPerguntas = localStorage.getItem('numPergunta');
-  console.log(numPerguntas);
+  let numPerguntas = localStorage.getItem('numPergunta');  
   const listaPerguntas = document.querySelector('.criar');
   listaPerguntas.innerHTML = '';
 
-  for (let i = 0; i < numPerguntas; i++) {
-    if (i === 0){
+  for (let i = 1; i <= numPerguntas; i++) {
+    if (i === 1){
         listaPerguntas.innerHTML += `
         <div class="ulPergunta">
             <ul>
-            <h2>Pergunta 1</h2>
-            <li><input type="text" placeholder="Texto da Pergunta" /></li>
-            <li><input type="text" placeholder="Cor de fundo da pergunta" /></li>
+            <h2>Pergunta ${i}</h2>
+            <li><input type="text" placeholder="Texto da Pergunta" id="textoPerguntaInput${i}"/></li>
+            <li><input type="text" placeholder="Cor de fundo da pergunta" id="corPerguntaInput${i}"/></li>
             <h2>Resposta correta</h2>
-            <li><input type="text" placeholder="Resposta correta" /></li>
-            <li><input type="text" placeholder="URL da imagem" /></li>
+            <li><input type="text" placeholder="Resposta correta" id="textoRespCorreta${i}"/></li>
+            <li><input type="text" placeholder="URL da imagem" id="textoUrlCorreta${i}"/></li>
             <h2>Respostas incorretas</h2>
-            <li><input type="text" placeholder="Resposta incorreta 1" /></li>
-            <li><input type="text" placeholder="URL da imagem 1" /></li>
+            <li><input type="text" placeholder="Resposta incorreta 1" id="textoRespIncA${i}"/></li>
+            <li><input type="text" placeholder="URL da imagem 1" id="textoUrlRespIncA${i}"/></li>
             <br />
-            <li><input type="text" placeholder="Resposta incorreta 2" /></li>
-            <li><input type="text" placeholder="URL da imagem 2" /></li>
+            <li><input type="text" placeholder="Resposta incorreta 2" id="textoRespIncB${i}"/></li>
+            <li><input type="text" placeholder="URL da imagem 2" id="textoUrlRespIncB${i}"/></li>
             <br />
-            <li><input type="text" placeholder="Resposta incorreta 3" /></li>
-            <li><input type="text" placeholder="URL da imagem 3" /></li>
+            <li><input type="text" placeholder="Resposta incorreta 3" id="textoRespIncC${i}"/></li>
+            <li><input type="text" placeholder="URL da imagem 3" id="textoUrlRespIncC${i}"/></li>
             </ul>
       </div>`;      
     } else {
     listaPerguntas.innerHTML += `        
         <br />
-        <div class="ulPergunta esconderUl" id="perguntaEscondida${i + 1}">
+        <div class="ulPergunta esconderUl" id="perguntaEscondida${i}">
             <ul>
-                <h2>Pergunta ${i + 1}</h2>
-                <li><input type="text" placeholder="Texto da Pergunta" id="textoPerguntaInput${i + 1}"/></li>
-                <li><input type="text" placeholder="Cor de fundo da pergunta" id="corPerguntaInput${i + 1}"/></li>
+                <h2>Pergunta ${i}</h2>
+                <li><input type="text" placeholder="Texto da Pergunta" id="textoPerguntaInput${i}"/></li>
+                <li><input type="text" placeholder="Cor de fundo da pergunta" id="corPerguntaInput${i}"/></li>
                 <h2>Resposta correta</h2>
-                <li><input type="text" placeholder="Resposta correta" /></li>
-                <li><input type="text" placeholder="URL da imagem" /></li>
+                <li><input type="text" placeholder="Resposta correta" id="textoRespCorreta${i}"/></li>
+                <li><input type="text" placeholder="URL da imagem" id="textoUrlCorreta${i}"/></li>
                 <h2>Respostas incorretas</h2>
-                <li><input type="text" placeholder="Resposta incorreta 1" /></li>
-                <li><input type="text" placeholder="URL da imagem 1" /></li>
+                <li><input type="text" placeholder="Resposta incorreta 1" id="textoRespIncA${i}"/></li>
+                <li><input type="text" placeholder="URL da imagem 1" id="textoUrlRespIncA${i}"/></li>
                 <br />
-                <li><input type="text" placeholder="Resposta incorreta 2" /></li>
-                <li><input type="text" placeholder="URL da imagem 2" /></li>
+                <li><input type="text" placeholder="Resposta incorreta 2" id="textoRespIncB${i}"/></li>
+                <li><input type="text" placeholder="URL da imagem 2" id="textoUrlRespIncB${i}"/></li>
                 <br />
-                <li><input type="text" placeholder="Resposta incorreta 3" /></li>
-                <li><input type="text" placeholder="URL da imagem 3" /></li>
+                <li><input type="text" placeholder="Resposta incorreta 3" id="textoRespIncC${i}"/></li>
+                <li><input type="text" placeholder="URL da imagem 3" id="textoUrlRespIncC${i}"/></li>
             </ul>
         </div>
         
-        <div class="pergunta${i + 1} pergutaEscondida">
-            <h3>Pergunta ${i + 1}</h3>
-            <button onclick="expandirPergunta(${i + 1})"><img src="imagens/mostrarpergunta.svg" alt=""> </button>
+        <div class="pergunta${i} pergutaEscondida">
+            <h3>Pergunta ${i}</h3>
+            <button onclick="expandirPergunta(${i})"><img src="imagens/mostrarpergunta.svg" alt=""> </button>
         </div>
       `;
   }}
+}
+
+function prosseguirNiveis(){
+    let numPerguntas = localStorage.getItem('numPergunta');
+    let contRespInc = 0;
+    let validacao = [];
+    let validacaoRespInc = [];
+    
+    for (let i = 1; i <= numPerguntas; i++){
+        //variavell de controle para confirmar que tem ao menos uma resposta incorreta respondida
+        contRespInc = []
+        //variaveis de controle dos ids das perguntas e respostas corretas
+        let idPergunta = "#textoPerguntaInput" + i;
+        let idHex = "#corPerguntaInput" + i; 
+        let idRespCorreta = "#textoRespCorreta" + i;
+        let idUrlCorreta = "#textoUrlCorreta" + i;
+        
+        //variaveis de controle dos ids das perguntas e respostas incorretas
+        let idRespIncA = "#textoRespIncA" + i;
+        let idRespUrlIncA = "#textoUrlRespIncA" + i; 
+        let idRespIncB = "#textoRespIncB" + i;
+        let idRespUrlIncB = "#textoUrlRespIncB" + i;
+        let idRespIncC = "#textoRespIncC" + i;
+        let idRespUrlIncC = "#textoUrlRespIncC" + i;
+        
+        //variaveis para armazenar os valores para as perguntas e respostas corretas
+        let textoPergunta = document.querySelector(idPergunta).value;
+        let textoHex = document.querySelector(idHex).value;
+        let textoRespCorreta = document.querySelector(idRespCorreta).value;
+        let textoUrlCorreta = document.querySelector(idUrlCorreta).value;
+
+        //variaveis para armazenar os valores para as perguntas e respostas incorretas
+        let textoRespIncA = document.querySelector(idRespIncA).value;
+        let textoUrlIncA = document.querySelector(idRespUrlIncA).value;
+        let textoRespIncB = document.querySelector(idRespIncB).value;
+        let textoUrlIncB = document.querySelector(idRespUrlIncB).value;
+        let textoRespIncC = document.querySelector(idRespIncC).value;
+        let textoUrlIncC = document.querySelector(idRespUrlIncC).value;
+
+        if (20 <= textoPergunta.length && isValidHex(textoHex) && 0 < textoRespCorreta.length && isValidUrl(textoUrlCorreta)) {
+            validacao.push(true);
+          }else {
+            validacao.push(false);
+          }
+        //testes para validar os campos das respostas incorretas        
+        if (0 < textoRespIncA.length || 0 < textoUrlIncA.length){
+            if (0 < textoRespIncA.length && isValidUrl(textoUrlIncA)){
+                contRespInc.push(true);
+            } else{
+                contRespInc.push(false);
+            }
+            
+        }
+
+        if (0 < textoRespIncB.length || 0 < textoUrlIncB.length){
+            if (0 < textoRespIncB.length && isValidUrl(textoUrlIncB)){
+                contRespInc.push(true);
+            } else{
+                contRespInc.push(false);
+            }
+            
+        }
+
+        if (0 < textoRespIncC.length || 0 < textoUrlIncC.length){
+            if (0 < textoRespIncC.length && isValidUrl(textoUrlIncC)){
+                contRespInc.push(true);
+            } else{
+                contRespInc.push(false);
+            }
+            
+        }
+        
+        //condicao para validar se ao menos uma pergunta foi respondida
+        if (contRespInc.includes(false)){
+            validacaoRespInc.push(false);
+        } else if (contRespInc.includes(true)){
+            validacaoRespInc.push(true);
+        } else {
+            validacaoRespInc.push(null);
+        }        
+    
+    }  
+
+    
+    if (validacao.includes(false) || validacaoRespInc.includes(false) || validacaoRespInc.includes(null)){
+        alert('Dados incorretos, favor preencher corretamente!');
+
+    } else {
+        location.href = 'criarNiveis.html';
+        window.location.href = '/criarNiveis.html';
+
+    }    
 }
