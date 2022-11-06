@@ -311,9 +311,7 @@ h1 {
   color: #818181;
 }
 
-.esconder {
-  display: none;
-}
+
 
 .newQuizz {
   margin-top: 150px;
@@ -483,6 +481,24 @@ select:focus {
     border: none;
 }
 
+.container-resultado {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a{
+  text-decoration: none;
+  color: #818181;
+}
+
+.esconder {
+  display: none;
+}
+
 .meuId{
   display: none;
+  
 }
