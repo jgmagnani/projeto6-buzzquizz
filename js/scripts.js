@@ -122,6 +122,7 @@ function prosseguirPerguntas() {
   if (validacao === 4) {
     location.href = 'criarPerguntas.html';
     localStorage.setItem('numPergunta', perguntaInput);
+    localStorage.setItem('numNiveis', quizInput);
     window.location.href = '/criarPerguntas.html';
   } else {
     alert('Dados incorretos, favor preencher corretamente!');
@@ -286,4 +287,124 @@ function prosseguirNiveis(){
         window.location.href = '/criarNiveis.html';
 
     }    
+}
+
+
+function expandirNivel(num){    
+    let classNivel = 'nivelEscondido' + num
+    const nivelIcone = document.querySelector('.nivel' + CSS.escape(num));            
+    const nivel = document.getElementById(classNivel);
+    
+    nivelIcone.innerHTML = '';
+    nivel.classList.remove("esconderUl");
+    
+}
+
+function renderizarNiveis(){
+    let numNiveis = localStorage.getItem('numNiveis');    
+    const listaNiveis = document.querySelector('.criar');
+    listaNiveis.innerHTML = '';
+
+  for (let i = 1; i <= numNiveis; i++) {
+    if (i === 1){
+        listaNiveis.innerHTML += `
+        <div class="ulNiveis">
+            <ul>
+                <h2>Nível ${i}</h2>
+                <li>
+                <input type="text" name="" placeholder="Título do nível" id="tituloNivelInput${i}"/>
+                </li>
+                <li>
+                <input type="text" name="" placeholder="% de acerto mínima" id="acertoNivelInput${i}"/>
+                </li>
+                <li>
+                <input type="text" name="" placeholder="URL da imagem do nível" id="urlNivelInput${i}"/>
+                </li>
+                <li>
+                <input type="text" name="" placeholder="Descrição do nível" id="descNivelInput${i}"/>
+                </li>
+            </ul>
+        </div>
+        `;      
+    } else {
+        listaNiveis.innerHTML += `
+        <br />
+        <div class="ulNiveis esconderUl" id="nivelEscondido${i}">
+            <ul>
+                <h2>Nível ${i}</h2>
+                <li>
+                <input type="text" name="" placeholder="Título do nível" id="tituloNivelInput${i}"/>
+                </li>                
+                <li>
+                <input type="text" name="" placeholder="% de acerto mínima" id="acertoNivelInput${i}"/>
+                </li>
+                <li>
+                <input type="text" name="" placeholder="URL da imagem do nível" id="urlNivelInput${i}"/>
+                </li>
+                <li>
+                <input type="text" name="" placeholder="Descrição do nível" id="descNivelInput${i}"/>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="nivel${i} pergutaEscondida">
+            <h3>Nível ${i}</h3>
+            <button onclick="expandirNivel(${i})"><img src="imagens/mostrarpergunta.svg" alt="" /> </button>            
+        </div>
+        `;
+    }
+}
+
+}
+
+function finalizarNiveis(){    
+    let numNiveis = localStorage.getItem('numNiveis');
+    let validacao = [];
+    let validacaoAcert = [];
+
+    for (let i = 1; i <= numNiveis; i++){
+        //variaveis de controle dos ids dos Niveis
+        let idNivel = "#tituloNivelInput" + i;
+        let idAcerto ="#acertoNivelInput" + i;
+        let idUrl = "#urlNivelInput" + i;
+        let idDescNivel ="#descNivelInput" + i;
+        
+        //variaveis para armazenar os valores para os Niveis
+        let tituloNivel = document.querySelector(idNivel).value;
+        let acertoNivel = Number.parseInt(document.querySelector(idAcerto).value);
+        let urlNivel = document.querySelector(idUrl).value;
+        let descNivel = document.querySelector(idDescNivel).value;
+
+        
+        if (10 <= tituloNivel.length && isValidUrl(urlNivel) && 30 <= descNivel.length ) {
+            validacao.push(true);
+          }else {
+            validacao.push(false);
+          }
+        //Converte a % de acerto de string pra Int e valida se o numero é inteiro
+        if (Number.isInteger(acertoNivel) && 0 <= acertoNivel && acertoNivel <= 100){            
+            validacao.push(true);
+            validacaoAcert.push(acertoNivel);
+          }else {
+            validacao.push(false);
+          }        
+        
+        }
+        
+    if (validacaoAcert.includes(0)){
+        validacao.push(true);
+    }else {
+        validacao.push(false);
+    }
+    
+    console.log(validacaoAcert);    
+    console.log(validacao);
+
+    if (validacao.includes(false)){
+        alert('Dados incorretos, favor preencher corretamente!');
+    } else {
+        enviarQuizz();
+
+    }    
+
 }
