@@ -3,20 +3,20 @@ let idResposta = 0;
 let unicoQuizz;
 
 function buscarUInicoQuizz() {
-  console.log("Cheguei");
+  //console.log("Cheguei");
   idResposta = localStorage.getItem("idQuizz");
   pegarUnicoQuizz();
 }
 
 function pegarUnicoQuizz() {
   const promiseUnic = axios.get(`${urlApiQuizz}${idResposta}`);
-  console.log(idResposta);
+  //console.log(idResposta);
   promiseUnic.then(renderizarQuizz);
 }
 
 function renderizarQuizz(resposta) {
   unicoQuizz = resposta.data;
-  console.log(unicoQuizz);
+  //console.log(unicoQuizz);
   //const adcQuizz = document.querySelector();
   banner();
 }
@@ -93,7 +93,7 @@ function comportamento(elemento) {
 
   elemento.classList.add("respostaSelecionada");
   y.classList.add("respondida");
-  console.log(y);
+  //console.log(y);
 
   for (let i = 0; i < alternativas.length; i++) {
     if (alternativas[i].classList.contains("respostaSelecionada") == false) {
@@ -112,21 +112,97 @@ function comportamento(elemento) {
     }
   }
 
+  let resposta = elemento.querySelector(".meuId")
+  cxDasRespSelecionadas.push(resposta.innerHTML)
+
   setTimeout(proximaPergunta, 2000);
 }
 
+let cxDasRespSelecionadas = [];
 function proximaPergunta() {
   let listaPerguntas = document.querySelectorAll(".cx-pergunta");
   for (let i = 0; i < listaPerguntas.length; i++) {
     if (listaPerguntas[i].classList.contains("respondida") == false) {
       listaPerguntas[i].scrollIntoView();
+      break
     }
   }
+
+  let listaRespostas = document.querySelectorAll(".respondida");
+  if (listaPerguntas.length === listaRespostas.length) {
+    setTimeout(mostrarResultado,2000)
+  }
+}
+
+function mostrarResultado(){
+  let cxResultado = document.querySelector(".container-resultado");
+    cxResultado.classList.remove("esconder");
+    cxResultado.scrollIntoView()
+
+    mostrarNivel()
+}
+
+function mostrarNivel(){
+  let pontucao = 0;
+  //console.log(cxDasRespSelecionadas)
+
+  for(let i=0; i<cxDasRespSelecionadas.length; i++){
+    if(cxDasRespSelecionadas[i] == "true"){
+      pontucao += 1;
+    }
+  }
+
+  let pontuacaoFinal = Math.round((pontucao/cxDasRespSelecionadas.length)*100) // mostra a % de acerto
+  //console.log(pontuacaoFinal)
+
+  let niveis = unicoQuizz.levels // mostra a lista de niveis 
+  //console.log(niveis)
+
+  let cxResultado = document.querySelector(".cx-resultado")
+  cxResultado.innerHTML = "";
+
+  let minValues = [] // lista para verificar os valores dos niveis
+  for (let n=0; n<niveis.length; n++){
+    minValues.push(niveis[n].minValue)
+
+  } 
+  minValues.sort((a,b) => a - b) // coloca a lista dos valores dos niveis em ordem crescente 
+  //console.log(minValues)
+  
+
+  let posi = 0
+  for (let z= 0; z<minValues.length; z++){ 
+    if(pontuacaoFinal >= minValues[z] ){
+      posi = minValues[z]
+    }
+  }
+
+ // console.log(posi)
+
+  for (let c= 0; c<niveis.length; c++){
+      
+        if(niveis[c].minValue == posi){
+          cxResultado.innerHTML += `  
+              <div class="titulo">
+                  <p>${niveis[c].title}</p>
+              </div>
+              <div class="conteudo">
+                  <img src=${niveis[c].image} alt="">
+                  <div class="texto">
+                      <p>${niveis[c].text}</p>
+                  </div>
+              </div>`
+      }
+
+  }
+  
+
+
+
 }
 
 function reiniciar() {
   location.reload();
   let topo = document.querySelector(".banner");
   topo.scrollIntoView();
-  
 }
