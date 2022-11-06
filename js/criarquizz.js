@@ -26,12 +26,41 @@ function mostarQuizz() {
     test.classList.contains()
 }*/
 
+function mostrarPergunta(params) {
+    const clicado = params   
 
+    //pega o parentNode do clicado
+    let paiClicado = params.parentNode.querySelector(':nth-child(1)');
+    
+    
+    //busca a div de botao que não ta aparecendo
+    const seila = document.querySelector('.pergutaEscondida.esconderUl');    
+    
+    //Pega a div da pergunta que está aparecendo
+    const mostrandoP = document.querySelector('.mostrando');
+
+    //remove o mostrando e adiciona o esconder
+    mostrandoP.classList.remove('mostrando')
+    mostrandoP.classList.add('esconderUl')
+
+
+    paiClicado.classList.add('mostrando')
+    paiClicado.classList.remove('esconderUl')
+   
+
+    clicado.classList.add('esconderUl')
+    seila.classList.remove('esconderUl');    
+    window.scrollTo(10,0)
+
+}
+
+
+//tem que fazer um for pra quantidade de pergunta e niveis criados
 function enviarQuizz() {
     alert('vai mandar')
     const promiseEnvQuizz = axios.post(urlEnviarQuizz,
         {
-            title: "AEEEEEEEEE FERA",
+            title: "teste pergunta knd222",
             image: "https://http.cat/411.jpg",
             questions: [
                 {
@@ -39,12 +68,12 @@ function enviarQuizz() {
                     color: "#123456",
                     answers: [
                         {
-                            text: "Texto da resposta 1",
+                            text: "resposta correta",
                             image: "https://http.cat/411.jpg",
                             isCorrectAnswer: true
                         },
                         {
-                            text: "Texto da resposta 2",
+                            text: "resposta errada",
                             image: "https://http.cat/412.jpg",
                             isCorrectAnswer: false
                         }
@@ -55,12 +84,12 @@ function enviarQuizz() {
                     color: "#123456",
                     answers: [
                         {
-                            text: "Texto da resposta 1",
+                            text: "resposta correta",
                             image: "https://http.cat/411.jpg",
                             isCorrectAnswer: true
                         },
                         {
-                            text: "Texto da resposta 2",
+                            text: "resposta errada",
                             image: "https://http.cat/412.jpg",
                             isCorrectAnswer: false
                         }
@@ -71,12 +100,12 @@ function enviarQuizz() {
                     color: "#123456",
                     answers: [
                         {
-                            text: "Texto da resposta 1",
+                            text: "resposta correta",
                             image: "https://http.cat/411.jpg",
                             isCorrectAnswer: true
                         },
                         {
-                            text: "Texto da resposta 2",
+                            text: "resposta errada",
                             image: "https://http.cat/412.jpg",
                             isCorrectAnswer: false
                         }
@@ -85,18 +114,35 @@ function enviarQuizz() {
             ],
             levels: [
                 {
-                    title: "Título do nível 1",
+                    title: "nível 1",
                     image: "https://http.cat/411.jpg",
                     text: "Descrição do nível 1",
                     minValue: 0
                 },
                 {
-                    title: "Título do nível 2",
+                    title: "nível 2",
                     image: "https://http.cat/412.jpg",
                     text: "Descrição do nível 2",
                     minValue: 50
+                },
+                {
+                    title: "nível 3",
+                    image: "https://http.cat/412.jpg",
+                    text: "Descrição do nível 3",
+                    minValue: 80
+                },
+                {
+                    title: "nível 4",
+                    image: "https://http.cat/412.jpg",
+                    text: "Descrição do nível 4",
+                    minValue: 100
                 }
             ]
         }
     )
 }
+
+function salvarRespostas() {
+    const perguntasCriadas = document.querySelector('.ulPergunta');
+    console.log(perguntasCriadas);
+    }
