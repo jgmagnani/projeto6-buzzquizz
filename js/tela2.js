@@ -2,48 +2,45 @@ let urlApiQuizz = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/";
 let idResposta = 0;
 let unicoQuizz;
 
-function buscarUInicoQuizz(){
-    console.log("Cheguei")  ;  
-    idResposta = localStorage.getItem("idQuizz");    
-    pegarUnicoQuizz();
+function buscarUInicoQuizz() {
+  console.log("Cheguei");
+  idResposta = localStorage.getItem("idQuizz");
+  pegarUnicoQuizz();
 }
 
-
-function pegarUnicoQuizz(){
-    const promiseUnic = axios.get(`${urlApiQuizz}${idResposta}`)
-    console.log(idResposta);
-    promiseUnic.then(renderizarQuizz);
-
+function pegarUnicoQuizz() {
+  const promiseUnic = axios.get(`${urlApiQuizz}${idResposta}`);
+  console.log(idResposta);
+  promiseUnic.then(renderizarQuizz);
 }
 
 function renderizarQuizz(resposta) {
-    unicoQuizz = resposta.data
-    console.log(unicoQuizz);
-    //const adcQuizz = document.querySelector();
-    banner()
+  unicoQuizz = resposta.data;
+  console.log(unicoQuizz);
+  //const adcQuizz = document.querySelector();
+  banner();
 }
 
-function banner(){
-    let banner = document.querySelector(".banner")
-    banner.innerHTML  = ""
-    banner.innerHTML += `
+function banner() {
+  let banner = document.querySelector(".banner");
+  banner.innerHTML = "";
+  banner.innerHTML += `
         <img src=${unicoQuizz.image} alt="">
         <h2>${unicoQuizz.title}</h2>
-    `
-    perguntas()
+    `;
+  perguntas();
 }
 
-function perguntas(){
-    let cxPerguntas = document.querySelector(".container-perguntas")
-    cxPerguntas.innerHTML = ""
+function perguntas() {
+  let cxPerguntas = document.querySelector(".container-perguntas");
+  cxPerguntas.innerHTML = "";
 
-    let listaPerguntas = unicoQuizz.questions
+  let listaPerguntas = unicoQuizz.questions;
 
-    for (let i=0; i< listaPerguntas.length; i++){
-        let pergunta = listaPerguntas[i]
-        
+  for (let i = 0; i < listaPerguntas.length; i++) {
+    let pergunta = listaPerguntas[i];
 
-            cxPerguntas.innerHTML += `
+    cxPerguntas.innerHTML += `
             <div class="cx-pergunta">
                 <div class="pergunta">
                     <p>${pergunta.title}</p>
@@ -52,65 +49,84 @@ function perguntas(){
                                      
                 </div>
             </div> 
-            ` 
-        
-           inserirRespostas(pergunta, i)
-            
-        
-    }
+            `;
 
+    inserirRespostas(pergunta, i);
+  }
 }
 
-function inserirRespostas(pergunta, i){
-    //console.log(i)
-    let cxRespostas = document.querySelectorAll(".respostas")
-    //console.log(cxRespostas.length)
-    
-    let listaRespostas = pergunta.answers.sort(comparador)
+function inserirRespostas(pergunta, i) {
+  //console.log(i)
+  let cxRespostas = document.querySelectorAll(".respostas");
+  //console.log(cxRespostas.length)
 
-    for (let x=0; x < listaRespostas.length; x++ ){
-            let resposta = listaRespostas[x]
+  let listaRespostas = pergunta.answers.sort(comparador);
 
-            cxRespostas[i].innerHTML += `
+  for (let x = 0; x < listaRespostas.length; x++) {
+    let resposta = listaRespostas[x];
+
+    cxRespostas[i].innerHTML += `
             <div class="opcao" onclick="comportamento(this)">
             <img src=${resposta.image} alt="">
             <p>${resposta.text}</p>
             <p class="meuId">${resposta.isCorrectAnswer}</p>
-            </div> `
-    }
-        
-        
-    
+            </div> `;
+  }
 }
 
-
-function comparador() { 
-	return Math.random() - 0.5; 
+function comparador() {
+  return Math.random() - 0.5;
 }
 
+function comportamento(elemento) {
+  let x = elemento.parentNode;
+  let y = x.parentNode;
 
-function comportamento(elemento){
-    let x = elemento.parentNode
-    let alternativas = x.querySelectorAll(".opcao")
-    //console.log(alternativas[0].innerHTML)
-    //console.log(elemento.innerHTML)
-    
-    
-    for (i=0; i< alternativas.length; i++){
-        if (alternativas[i].innerHTML !==  elemento.innerHTML){
-            alternativas[i].classList.add("efeito")
-        }
+  let alternativas = x.querySelectorAll(".opcao");
+
+  if (
+    elemento.classList.contains("respostaSelecionada") ||
+    elemento.classList.contains("efeito")
+  ) {
+    return;
+  }
+
+  elemento.classList.add("respostaSelecionada");
+  y.classList.add("respondida");
+  console.log(y);
+
+  for (let i = 0; i < alternativas.length; i++) {
+    if (alternativas[i].classList.contains("respostaSelecionada") == false) {
+      alternativas[i].classList.add("efeito");
     }
+  }
 
-    let corLetra = x.querySelectorAll(".meuId")
-    
-    for (let u=0; u< corLetra.length; u++){
-        if(corLetra[u].innerHTML == "true"){
-            corLetra[u].parentNode.classList.add("correto")
-            //console.log("sim")
-        } else{
-            corLetra[u].parentNode.classList.add("errado")
-        }
+  let corLetra = x.querySelectorAll(".meuId");
+
+  for (let u = 0; u < corLetra.length; u++) {
+    if (corLetra[u].innerHTML == "true") {
+      corLetra[u].parentNode.classList.add("correto");
+      //console.log("sim")
+    } else {
+      corLetra[u].parentNode.classList.add("errado");
     }
+  }
 
+  setTimeout(proximaPergunta, 2000);
+}
+
+function proximaPergunta() {
+  let listaPerguntas = document.querySelectorAll(".cx-pergunta");
+  for (let i = 0; i < listaPerguntas.length; i++) {
+    if (listaPerguntas[i].classList.contains("respondida") == false) {
+      listaPerguntas[i].scrollIntoView();
+    }
+  }
+}
+
+function reiniciar() {
+  location.reload();
+  let topo = document.querySelector(".banner");
+  topo.scrollIntoView();
+  
 }
