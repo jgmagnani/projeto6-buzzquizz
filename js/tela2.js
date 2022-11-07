@@ -184,7 +184,7 @@ function mostrarNivel(){
         if(niveis[c].minValue == posi){
           cxResultado.innerHTML += `  
               <div class="titulo">
-                  <p>${niveis[c].title}</p>
+                  <p>${pontuacaoFinal} % de acerto: ${niveis[c].title}</p>
               </div>
               <div class="conteudo">
                   <img src=${niveis[c].image} alt="">

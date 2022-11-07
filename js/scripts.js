@@ -1,5 +1,5 @@
 let listaQuizz;
-let id = '';
+let id = [];
 let urlApi = 'https://mock-api.driven.com.br/api/v4/buzzquizz/';
 let url = window.location.href.toString();
 let variavel;
@@ -52,35 +52,56 @@ function chegouQuizz(resposta) {
   addQuizz();
 }
 
+buscarIds()
+function buscarIds(){
+  let buscaID = localStorage.getItem('idRecebido')
+  id.push(buscaID);
+}
+console.log(id);
+
 function addQuizz() {
   let listaTodasQuizz = document.querySelector('.lista-todosQuizz');
   listaTodasQuizz.innerHTML = '';
 
   let lsitaSeusQuizz = document.querySelector('.lista-seusQuizz');
-  //lsitaSeusQuizz.innerHTML = "";
+  lsitaSeusQuizz.innerHTML = "";
+
   variavel = '';
   for (let i = 0; i < listaQuizz.length; i++) {
     let quizz = listaQuizz[i];
 
-    if (quizz.id === id) {
-      lsitaSeusQuizz.innerHTML += `
-                <li class="quizz" onclick="acessarTela2(this)">
-                    <img src=${quizz.image} alt="">
-                    <div class="dregade"></div>
-                    <p>${quizz.title}</p>
-                    <p class="meuId">${quizz.id}</p>
-                </li>
-            `;
+    if (id.length == 0) {   
+      listaTodasQuizz.innerHTML += `
+          <li class="quizz" onclick="acessarTela2(this)">
+              <img src=${quizz.image} alt="">
+              <div class="dregade"></div>
+              <p>${quizz.title}</p>
+              <p class="meuId">${quizz.id}</p>
+          </li>`;
     }
-    listaTodasQuizz.innerHTML += `
-            <li class="quizz" onclick="acessarTela2(this)">
-                <img src=${quizz.image} alt="">
-                <div class="dregade"></div>
-                <p>${quizz.title}</p>
-                <p class="meuId">${quizz.id}</p>
-            </li>
-        `;
-    //console.log("ID " + quizz.id)
+
+    for (let j = 0; j < id.length; j++){
+     
+      if (quizz.id == id[j] ) {
+        lsitaSeusQuizz.innerHTML += `
+        <li class="quizz" onclick="acessarTela2(this)">
+            <img src=${quizz.image} alt="">
+            <div class="dregade"></div>
+            <p>${quizz.title}</p>
+            <p class="meuId">${quizz.id}</p>
+         </li>`;
+        }
+
+      listaTodasQuizz.innerHTML += `
+              <li class="quizz" onclick="acessarTela2(this)">
+                  <img src=${quizz.image} alt="">
+                  <div class="dregade"></div>
+                  <p>${quizz.title}</p>
+                  <p class="meuId">${quizz.id}</p>
+              </li>
+          `;
+      //console.log("ID " + quizz.id)
+    }
   }
 
   if (lsitaSeusQuizz.innerHTML === '') {
@@ -91,6 +112,32 @@ function addQuizz() {
     criarQuizz.classList.add('esconder');
   }
 }
+
+/*function addSeusQuizz(){
+  let listaTodasSeusQuizz = document.querySelector('.lista-seusQuizz');
+  listaTodasSeusQuizz.innerHTML = '';
+
+  for (let i = 1; i < listaQuizz.length; i++) {
+    let quizz = listaQuizz[i];
+    
+    
+    for (let j = 0; j < id.length; j++){
+     
+    if (quizz.id === id[j] ) {
+      listaTodasSeusQuizz.innerHTML += `
+      <li class="quizz" onclick="acessarTela2(this)">
+          <img src=${quizz.image} alt="">
+          <div class="dregade"></div>
+          <p>${quizz.title}</p>
+          <p class="meuId">${quizz.id}</p>
+       </li>`;
+
+
+      }
+    }
+
+  }
+}*/
 
 function salvarQuizz() {
   novoQuizz = {};
