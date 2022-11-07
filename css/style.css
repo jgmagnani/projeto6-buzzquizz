@@ -276,7 +276,7 @@ h1 {
   height: 300px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .conteudo img {
@@ -287,6 +287,14 @@ h1 {
 .conteudo .texto {
   width: 300px;
   height: 275px;
+  word-break: break-all;
+  font-family: Roboto;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+
 }
 
 .texto p {
