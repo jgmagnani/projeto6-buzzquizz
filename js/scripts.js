@@ -35,7 +35,7 @@ const isValidHex = (urlString) => {
 function acessarTela2(elemento) {
   console.log('Elemento ' + elemento.querySelector('.meuId').innerHTML);
 
-  window.location.href = '/tela2.html';
+  window.location.href = 'tela2.html';
   localStorage.setItem('idQuizz', elemento.querySelector('.meuId').innerHTML);
 }
 
