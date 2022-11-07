@@ -187,7 +187,8 @@ function enviarQuizz() {
 
 
 function enviouQuizz(resposta){
-    //console.log('enviou ' + resposta.data)
+    const idRecebido = resposta.data.id;
+    //console.log(idRecebido)
     window.location.href = "quizzPronto.html"
 }
 
