@@ -53,31 +53,33 @@ function enviarQuizz() {
   
   //dados dos níveis está aqui localStorage.setItem("niveisCriados", niveisSerelizados)
   //dados do Quizz localStorage.setItem("novoQuizz", novoQuizzDes)
-  //dados das perguntas localStorage.setItem('perguntaCriada', perguntasSerializados);
-
-  //titulo: tituloQuizz, urlImagem: urlQuizz, perguntas: qtddPerguntas, niveis: qttdNiveis
-  const getQuizzSerelizados = localStorage.getItem('novoQuizz');
-  const quizzDeserializados = JSON.parse(getQuizzSerelizados);
-
-  let titleQuizz = quizzDeserializados.tituloQuizz;
-  let imgQuizz = quizzDeserializados.urlImagem;
+  //dados das perguntas localStorage.setItem('perguntaCriada', perguntasSerializados);  
 
   //tituloPergunta: , colorPergunta: , respostaCorreta: , imagemCorreta: , respostaErrada1:, imagemErrada1: imgErrada1.value,      respostaErrada2: errada2.value,
   const getPerguntasSerelizadas = localStorage.getItem('perguntaCriada');
   const perguntasDeserializadas = JSON.parse(getPerguntasSerelizadas);
 
-  const arrayPerguntas = [];
-  const array1 = [];
   
-  for (let i = 0; i < perguntasDeserializadas.length; i++) {
-    let objectPerguntas = {};
-    let objectRespostas = {};
+  let array1 = [];
+  //console.log(perguntasDeserializadas)
+  let objectPerguntas = {};
+  let objectRespostas = {};
+  let respCorreta;
+  let imgCorreta;
+  let questions = [];
 
+  for (let i = 0; i < perguntasDeserializadas.length; i++) {
+    objectPerguntas = {};
+    objectRespostas = {};
+    respCorreta;
+    imgCorreta;    
+    
+    //pega o titulo e cor de fundo da pergunta
     let titleP = perguntasDeserializadas[i].tituloPergunta;
     let colorP = perguntasDeserializadas[i].colorPergunta;
 
-    let respCorreta = perguntasDeserializadas[i].respostaCorreta;
-    let imgCorreta = perguntasDeserializadas[i].imagemCorreta;
+    respCorreta = perguntasDeserializadas[i].respostaCorreta;
+    imgCorreta = perguntasDeserializadas[i].imagemCorreta;
 
     objectRespostas = {
       text: respCorreta,
@@ -86,14 +88,14 @@ function enviarQuizz() {
     };
     array1.push(objectRespostas);
 
+    objectRespostas = {};
+
     if (perguntasDeserializadas[i].respostaErrada1 !== '') {
       objectRespostas = {};
-      let respErrada1 = perguntasDeserializadas[i].respostaErrada1;
-      let imgErrada1 = perguntasDeserializadas[i].imagemErrada1;
 
       objectRespostas = {
-        text: respErrada1,
-        image: imgErrada1,
+        text: perguntasDeserializadas[i].respostaErrada1,
+        image: perguntasDeserializadas[i].imagemErrada1,
         isCorrectAnswer: false
       };
       array1.push(objectRespostas);
@@ -101,11 +103,10 @@ function enviarQuizz() {
 
     if (perguntasDeserializadas[i].respostaErrada2 !== '') {
       objectRespostas = {};
-      let respErrada2 = perguntasDeserializadas[i].respostaErrada2;
-      let imgErrada2 = perguntasDeserializadas[i].imagemErrada2;
+      
       objectRespostas = {
-        text: respErrada2,
-        image: imgErrada2,
+        text: perguntasDeserializadas[i].respostaErrada2,
+        image: perguntasDeserializadas[i].imagemErrada2,
         isCorrectAnswer: false
       };
       array1.push(objectRespostas);
@@ -113,11 +114,10 @@ function enviarQuizz() {
 
     if (perguntasDeserializadas[i].respostaErrada3 !== '') {
       objectRespostas = {};
-      let respErrada3 = perguntasDeserializadas[i].respostaErrada3;
-      let imgErrada3 = perguntasDeserializadas[i].imagemErrada3;
+      
       objectRespostas = {
-        text: respErrada3,
-        image: imgErrada3,
+        text: perguntasDeserializadas[i].respostaErrada3,
+        image: perguntasDeserializadas[i].imagemErrada3,
         isCorrectAnswer: false
       };
       array1.push(objectRespostas);
@@ -128,15 +128,21 @@ function enviarQuizz() {
       color: colorP,
       answers: array1,
     };
-    arrayPerguntas.push(objectPerguntas);
-  }
 
+    questions.push(objectPerguntas);
+    array1 = [];
+    objectPerguntas = {};
+    
+    
+  }
+  //console.log(questions)
   //tituloNivel: tituloNivel,  acertoNivel: acertoNivel,  urlNivel: urlNivel, decricaoNivel: descNivel,
   const getNiveisSerelizados = localStorage.getItem('niveisCriados');
   const niveisDeserializados = JSON.parse(getNiveisSerelizados);
-  const levels = [];
+  let levels = [];
   let objectNivel = {};
-  for (let j = 0; j < niveisDeserializados.length; j++) {
+  
+  for (let j = 0; j < niveisDeserializados.length; j++) {    
     objectNivel = {};
     let titleNivel = niveisDeserializados[j].tituloNivel;
     let imgNivel = niveisDeserializados[j].urlNivel;
@@ -152,14 +158,25 @@ function enviarQuizz() {
 
     levels.push(objectNivel)
   }
+  //console.log(levels)
+
+  //let aloTeste = JSON.stringify(questions)
+  //let aloTeste3 = JSON.stringify(levels)
+
+  //titulo: tituloQuizz, urlImagem: urlQuizz, perguntas: qtddPerguntas, niveis: qttdNiveis
+  const getQuizzSerelizados = localStorage.getItem('novoQuizz');
+  const quizzDeserializados = JSON.parse(getQuizzSerelizados);
+
+  let titleQuizz = quizzDeserializados.titulo;
+  let imgQuizz = quizzDeserializados.urlImagem;
   
-
-
+  
+  //console.log(levels)
    const promiseEnvQuizz = axios.post(urlEnviarQuizz,
         {
             title: titleQuizz,
             image: imgQuizz,
-            questions: arrayPerguntas,
+            questions: questions,
             levels: levels
         })
 
@@ -170,12 +187,12 @@ function enviarQuizz() {
 
 
 function enviouQuizz(resposta){
-    console.log('enviou ' + resposta.data)
+    //console.log('enviou ' + resposta.data)
     window.location.href = "quizzPronto.html"
 }
 
 function erroEnviar(error){
-    console.log("ERROY" + error.data)
+    console.log(error.response.data)
 }
 
 
