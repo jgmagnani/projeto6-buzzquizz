@@ -157,14 +157,17 @@ h1 {
   width: 100%;
   height: 227px;
   opacity: 60%;
-}
+  object-fit: cover;
+ }
 
 .banner h2 {
   position: absolute;
-  top: 50%;
-  left: 25%;
   font-size: 40px;
-  color: #FFFFFF;
+  color: #FFFFFF; 
+  top: 60%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
 }
 
 .container-perguntas {
@@ -308,9 +311,7 @@ h1 {
   color: #818181;
 }
 
-.esconder {
-  display: none;
-}
+
 
 .newQuizz {
   margin-top: 150px;
@@ -480,6 +481,49 @@ select:focus {
     border: none;
 }
 
+.container-resultado {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a{
+  text-decoration: none;
+  color: #818181;
+}
+
+.esconder {
+  display: none;
+}
+
 .meuId{
   display: none;
+  
+}
+
+.quizzPronto{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    
+  align-items: center;
+  margin-top: 213px;
+}
+
+.imageQuizzPronto img{
+  width: 500px;
+  height: 266px;
+  margin-top: 45px;
+  border-radius: 5px;
+}
+
+.voltarHome{
+  font-family: Roboto;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #818181;
 }

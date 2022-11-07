@@ -9,7 +9,7 @@
 
     <title>BuzzQuizz</title>
   </head>
-  <body onload="salvarRespostas()">
+  <body onload="renderizarNiveis()">
     <header>BuzzQuizz</header>
 
     <div class="tituloCriar">
@@ -96,8 +96,8 @@
       <br />
     </div>
 
-    <div class="btnCriar">
-      <input onclick="enviarQuizz()" type="button" value="Finalizar Quizz" />
+    <div class="btnCriar">      
+      <input onclick="finalizarNiveis()" type="button" value="Finalizar Quizz" />
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
